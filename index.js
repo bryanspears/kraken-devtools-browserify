@@ -11,8 +11,10 @@ module.exports = function (options) {
 
   return function (data, args, callback) {
     //console.log(JSON.stringify(args, null, 4));
-    var debug = (args.debug && args.debug === true) ? true : false;
-    var b = browserify({ debug: debug });
+    var browserifyOptions = (args.browserifyOptions) ? args.browserifyOptions : {};
+    browserifyOptions.debug = (browserifyOptions.debug === true) ? true : false;
+
+    var b = browserify(browserifyOptions);
 
     //load transforms if specified
     if (options.transform) {
